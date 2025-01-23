@@ -3,23 +3,24 @@ import time
 
 
 class Pomadur:
-  def __init__(self, work_minutes, break_minutes):
+  """It is my own class for Pomadur app"""
+
+  def __init__(self, work_minutes, break_minutes, big_break_time):
     self.work_minutes = work_minutes
     self.break_minutes = break_minutes
+    self.big_break_time = big_break_time
 
     self.pomadur_thread = None
     self.pomadur_alive = False
 
   def start_pomadur(self):
-    counter = 0
+    work_seconds = self.work_minutes * 60
 
-    while self.pomadur_alive:
-      if counter >= 25:
+    for second in range(work_seconds):
+      if second >= work_seconds:
         self.pomadur_alive = False
 
-      print(f"counter: {counter}")
-
-      counter += 1
+      print(second)
 
       time.sleep(1)
 
@@ -35,13 +36,14 @@ class Pomadur:
 
 
 def main():
-  #work_time = 25
-  work_time = 6
+  # Setup pomodoro minutes
+  work_time = 1
   break_time = 5
+  big_break_time = 15
 
-  pomadur = Pomadur(work_time, break_time)
+  # Starts pomodoro counter
+  pomadur = Pomadur(work_time, break_time, big_break_time)
   pomadur.start()
-  #pomadur.stop()
 
 if __name__ == "__main__":
   main()
