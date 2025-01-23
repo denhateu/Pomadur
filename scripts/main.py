@@ -25,13 +25,16 @@ class Pomadur:
 
     seconds_counter = 0
 
+    # Pomadur main logic
     for second in range(pomadoro_seconds):
       pomadoro_minutes_string = f"{pomadoro_minutes}"
       seconds_counter_string = f"{seconds_counter}"
 
+      # Add leading zero for minutes
       if pomadoro_minutes < 10:
         pomadoro_minutes_string = f"0{pomadoro_minutes}"
 
+      # Add leading zero for seconds
       if seconds_counter < 10:
         seconds_counter_string = f"0{seconds_counter}"
 
@@ -39,6 +42,7 @@ class Pomadur:
         pomadoro_minutes -= 1
         seconds_counter = 60
 
+      # Draw pomadur time
       print(f"{pomadoro_minutes_string}:{seconds_counter_string}")
 
       seconds_counter -= 1
