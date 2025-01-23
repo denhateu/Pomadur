@@ -11,27 +11,45 @@ class Pomadur:
     self.big_break_time = big_break_time
 
     self.pomadur_thread = None
-    self.pomadur_alive = False
 
-  def start_pomadur(self):
-    work_seconds = self.work_minutes * 60
+  def start_pomadur(self, mode="work"):
+    # Gets pomadur mode and minutes for it's mode
+    if mode == "work":
+      pomadoro_minutes = self.work_minutes
+    elif mode == "break":
+      pomadoro_minutes = self.break_minutes
+    elif mode == "bigbreak":
+      pomadoro_minutes = self.big_break_time
 
-    for second in range(work_seconds):
-      if second >= work_seconds:
-        self.pomadur_alive = False
+    pomadoro_seconds = pomadoro_minutes * 60
 
-      print(second)
+    seconds_counter = 0
+
+    for second in range(pomadoro_seconds):
+      pomadoro_minutes_string = f"{pomadoro_minutes}"
+      seconds_counter_string = f"{seconds_counter}"
+
+      if pomadoro_minutes < 10:
+        pomadoro_minutes_string = f"0{pomadoro_minutes}"
+
+      if seconds_counter < 10:
+        seconds_counter_string = f"0{seconds_counter}"
+
+      if seconds_counter == 0:
+        pomadoro_minutes -= 1
+        seconds_counter = 60
+
+      print(f"{pomadoro_minutes_string}:{seconds_counter_string}")
+
+      seconds_counter -= 1
 
       time.sleep(1)
 
   def start(self):
-    self.pomadur_alive = True
-
-    self.pomadur_thread = threading.Thread(target=self.start_pomadur, args=())
+    self.pomadur_thread = threading.Thread(target=self.start_pomadur, args=("work",))
     self.pomadur_thread.start()
 
   def stop(self):
-    self.pomadur_alive = False
     self.pomadur_thread.join()
 
 
