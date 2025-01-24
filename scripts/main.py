@@ -1,7 +1,18 @@
+import time
+from pyfiglet import Figlet
+
 from pomadur import Pomadur
 
 
+# Configure pyfiglet
+figlet = Figlet()
+
+
 def main():
+  # Show logo
+  print(figlet.renderText(f"Pomadur"))
+  time.sleep(3)
+
   # Setup pomodoro minutes
   work_time = 1
   break_time = 1
