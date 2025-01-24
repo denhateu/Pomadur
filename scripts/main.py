@@ -1,6 +1,7 @@
 import time
 from pyfiglet import Figlet
 
+from config import AUTHOR, APP_NAME, APP_VERSION
 from pomadur import Pomadur
 
 
@@ -10,7 +11,11 @@ figlet = Figlet()
 
 def main():
   # Show logo
-  print(figlet.renderText(f"Pomadur"))
+  print(figlet.renderText(APP_NAME), end='')
+  print("===========")
+  print(f"Author: {AUTHOR}")
+  print(f"Version: {APP_VERSION}")
+  print()
   time.sleep(3)
 
   # Setup pomodoro minutes
