@@ -1,5 +1,15 @@
 import threading
 import time
+import os
+from pyfiglet import Figlet
+
+
+# Configure pyfiglet
+figlet = Figlet(font="slant")
+
+
+def clear_screen():
+  os.system("cls" if os.name == "nt" else "clear")
 
 
 class Pomadur:
@@ -25,6 +35,36 @@ class Pomadur:
 
     # For check if pomodoro ended
     self.pomadur_ended = False
+
+  def draw_border(self, border_length=1, border_sym='=') -> None:
+    for i in range(border_length):
+      print(border_sym, end='')
+
+    print()
+
+  def display_pomadur_info(self, mode, minutes) -> None:
+    seconds = minutes * 60
+
+    # List of pomadur info
+    info = [
+      f"Mode: {mode}",
+      f"Minutes: {minutes}",
+      f"Total seconds: {seconds}",
+      f"Big break after: {self.pomodors_left_before_big_break}",
+    ]
+
+    # Get the longest line
+    border_length = int(len(max(info, key=len)))
+
+    print()
+
+    # Draw pomadur info with beautiful borders
+    self.draw_border(border_length)
+
+    for current_info in info:
+      print(current_info)
+
+    self.draw_border(border_length)
 
   def start_pomadur_seeker(self) -> None:
     """Watches, switches and starts new threads for Pomodoros"""
@@ -102,14 +142,9 @@ class Pomadur:
     # Gets pomodoro total seconds
     pomadoro_seconds = pomadoro_minutes * 60
 
-    print()
-    print("================")
-    print(f"Mode: {mode}")
-    print(f"Minutes: {pomadoro_minutes}")
-    print(f"Total seconds: {pomadoro_seconds}")
-    print(f"Big break after: {self.pomodors_left_before_big_break}")
-    print("================")
-    print()
+    # Copy variable for show minutes and seconds in info
+    # because minutes value changing in loop
+    pomadoro_minutes_copy = pomadoro_minutes
 
     seconds_counter = 0
 
@@ -131,11 +166,15 @@ class Pomadur:
         seconds_counter = 60
 
       # Draw pomadur time
-      print(f"{pomadoro_minutes_string}:{seconds_counter_string}")
+      self.display_pomadur_info(mode, pomadoro_minutes_copy)
+      print(figlet.renderText(f"{pomadoro_minutes_string}:{seconds_counter_string}"), end="\r")
 
       seconds_counter -= 1
 
       time.sleep(1)
+
+      # Clear terminal
+      clear_screen()
 
     self.pomadur_ended = True
 
@@ -147,6 +186,8 @@ class Pomadur:
     """Starts pomodoro seeker for pomodoro control"""
 
     self.pomadur_alive = True
+
+    clear_screen()
 
     self.pomadur_seeker_thread = threading.Thread(target=self.start_pomadur_seeker, args=())
     self.pomadur_seeker_thread.start()
