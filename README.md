@@ -17,8 +17,7 @@
   Но перед этим нужно [клонировать репозиторий](https://github.com/denhateu/Pomadur#для-не-ленивых) к себе на комп.
 
   ```
-  $ chmod u+x run.sh
-  $ ./run.sh
+  ./run.sh
   ```
 </details>
 
