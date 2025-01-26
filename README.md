@@ -8,40 +8,56 @@
 
 ### Linux
 
-### Для ленивых
+#### Для ленивых
 
-Я сделал скрипт для автоматического скачивания зависимостей и запуска.
+<details>
+  <summary>Click me</summary>
 
-```
-$ chmod u+x run.sh
-$ ./run.sh
-```
+  Я сделал скрипт для автоматического скачивания зависимостей и запуска.
 
-### Для не ленивых
+  ```
+  $ chmod u+x run.sh
+  $ ./run.sh
+  ```
+</details>
+
+#### Для не ленивых
 
 1. Клонирование репозитория
 
-```git clone https://github.com/denhateu/Pomadur```
+```
+git clone https://github.com/denhateu/Pomadur
+```
 
 2. Переход в директорию с проектом
 
-```cd Pomadur```
+```
+cd Pomadur
+```
 
 3. Создание виртуального окружения
 
-```python3 -m venv venv```
+```
+python3 -m venv venv
+```
 
 4. Активация виртуального окружения
 
-```source venv/bin/activate```
+```
+source venv/bin/activate
+```
 
 5. Установка зависимостей
 
-```pip3 install -r requirements.txt```
+```
+pip3 install -r requirements.txt
+```
 
 6. Запуск скрипта
 
-```python3 scripts/main.py```
+```
+python3 scripts/main.py
+```
 
 ## Зависимости
 
