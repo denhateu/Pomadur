@@ -1,11 +1,6 @@
 import threading
 import time
 import os
-from pyfiglet import Figlet
-
-
-# Configure pyfiglet
-figlet = Figlet(font="slant")
 
 
 def clear_screen():
@@ -65,6 +60,8 @@ class Pomadur:
       print(current_info)
 
     self.draw_border(border_length)
+
+    print()
 
   def start_pomadur_seeker(self) -> None:
     """Watches, switches and starts new threads for Pomodoros"""
@@ -167,7 +164,7 @@ class Pomadur:
 
       # Draw pomadur time
       self.display_pomadur_info(mode, pomadoro_minutes_copy)
-      print(figlet.renderText(f"{pomadoro_minutes_string}:{seconds_counter_string}"), end="\r")
+      print(f"{pomadoro_minutes_string}:{seconds_counter_string}", end="\r")
 
       seconds_counter -= 1
 

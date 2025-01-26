@@ -1,15 +1,26 @@
 import time
 import os
-from pyfiglet import Figlet
 import configparser
 
 from config import AUTHOR, APP_NAME, APP_VERSION, CONFIG_FILE
 from pomadur import Pomadur
 
 
-# Configure pyfiglet
-figlet = Figlet()
-
+def display_logo() -> None:
+  logo = f"""
+$$$$$$$\                                          $$\                     
+$$  __$$\                                         $$ |                    
+$$ |  $$ | $$$$$$\  $$$$$$\$$$$\   $$$$$$\   $$$$$$$ |$$\   $$\  $$$$$$\  
+$$$$$$$  |$$  __$$\ $$  _$$  _$$\  \____$$\ $$  __$$ |$$ |  $$ |$$  __$$\ 
+$$  ____/ $$ /  $$ |$$ / $$ / $$ | $$$$$$$ |$$ /  $$ |$$ |  $$ |$$ |  \__|
+$$ |      $$ |  $$ |$$ | $$ | $$ |$$  __$$ |$$ |  $$ |$$ |  $$ |$$ |      
+$$ |      \$$$$$$  |$$ | $$ | $$ |\$$$$$$$ |\$$$$$$$ |\$$$$$$  |$$ |   Author: {AUTHOR}
+\__|       \______/ \__| \__| \__| \_______| \_______| \______/ \__|   Version: {APP_VERSION}
+  """
+                                                                          
+  print(logo)
+  print()
+  time.sleep(3)
 
 def create_config(config_file) -> bool:
   config = configparser.ConfigParser()
@@ -55,12 +66,7 @@ def read_config(config_file) -> dict:
 
 def main():
   # Show logo
-  print(figlet.renderText(APP_NAME), end='')
-  print("===========")
-  print(f"Author: {AUTHOR}")
-  print(f"Version: {APP_VERSION}")
-  print()
-  time.sleep(3)
+  display_logo()
 
   # Read config file for setup program
   config_values = read_config(CONFIG_FILE)
