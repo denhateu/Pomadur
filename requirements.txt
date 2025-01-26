@@ -1,7 +1,6 @@
 altgraph==0.17.4
 configparser==5.2.0
 pkg-resources==0.0.0
-pyfiglet==0.7.6
 PyInstaller==3.6
 pyinstaller-hooks-contrib==2022.0
 zipp==3.6.0
